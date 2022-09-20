@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="xslt.xml" type="application/xml"?>
+<ligne nom="H" entreprise="SNCF" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="projet.xsd">
+  <gares>
+    <gare id="g1">gare 1</gare>
+    <gare id="g2">gare 2</gare>
+    <gare id="g3">gare 3</gare>
+    <gare id="g4">gare 4</gare>
+  </gares>
+  <variantes>
+    <variante id="var1" gares="g1 g2 g3"/>
+    <variante id="var2" gares="g1 g4 g3"/>
+  </variantes>
+  <trains>
+    <train code="ELSA">
+      <trajets jours="Lundi Mercredi">
+        <trajet var="var1">
+          <depart gare="g1"/>
+          <terminus gare ="g3"/>
+          <horaires>
+            <horaire gare="g1">18:30</horaire>
+            <horaire gare="g2">19:45</horaire>
+            <horaire gare="g3">20:45</horaire>
+          </horaires>
+        </trajet>
+        <trajet var="var1">
+          <depart gare="g3"/>
+          <terminus gare ="g1"/> 
+          <horaires>
+            <horaire gare="g3">20:50</horaire>
+            <horaire gare="g2">19:45</horaire>
+            <horaire gare="g1">23:00</horaire>
+          </horaires>
+        </trajet>
+      </trajets>
+    </train>
+    
+    <train code="ERIC">
+      <trajets jours="Lundi Mercredi">
+        <trajet var="var1">
+          <depart gare="g1"/>
+          <terminus gare ="g3"/>
+          <horaires>
+            <horaire gare="g1">20:30</horaire>
+          </horaires>
+        </trajet>
+        <trajet var="var1">
+          <depart gare="g3"/>
+          <terminus gare ="g1"/> 
+          <horaires>
+            <horaire gare="g2">22:00</horaire>
+          </horaires>
+        </trajet>
+      </trajets>
+    </train>
+  </trains>
+</ligne>

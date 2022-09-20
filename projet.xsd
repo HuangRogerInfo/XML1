@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+    <xs:element name="ligne">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="gares" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="gare" maxOccurs="unbounded">
+                  <xs:complexType mixed="true">
+                     <xs:attribute name="id" type="xs:ID" use="required"/>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        
+          <xs:element name="variantes" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="variante" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:attribute name="id" type="xs:ID" use="required"/>
+                    <xs:attribute name="gares" type="xs:IDREFS" use="required"/>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        
+          <xs:element name="trains" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="train" maxOccurs="unbounded">
+                  <xs:complexType>
+                    <xs:sequence>
+                      <xs:element name="trajets" maxOccurs="1">
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="trajet" maxOccurs="unbounded">
+                              <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="depart">
+                                <xs:complexType>
+                                  <xs:attribute name="gare" type="IDREF"/>
+                                </xs:complexType>
+                                </xs:element>
+                                <xs:element name="terminus">
+                                  <xs:complexType>
+                                    <xs:attribute name="gare" type="IDREF"/>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="horaires" maxOccurs="1">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="horaire" maxOccurs="unbounded">
+                                        <xs:complexType mixed="true">
+                                          <xs:attribute name="gare" type="xs:IDREF" use="required"/>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                </xs:sequence>
+                                <xs:attribute name="var" type="xs:IDREF" use="required"/>
+                              </xs:complexType>
+                            </xs:element>  
+                          </xs:sequence>
+                          <xs:attribute name="jours" use="required">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="LUNDI"/>
+                                    <xs:enumeration value="MARDI"/>
+                                    <xs:enumeration value="MERCREDI"/>
+                                    <xs:enumeration value="JEUDI"/>
+                                    <xs:enumeration value="VENDREDI"/>
+                                    <xs:enumeration value="SAMEDI"/>
+                                    <xs:enumeration value="DIMANCHE"/>
+                                  </xs:restriction>
+                            </xs:simpleType>
+                          </xs:attribute>
+                        </xs:complexType>
+                      </xs:element>
+                    </xs:sequence>
+                    <xs:attribute name="code" type="xs:ID" use="required"/>
+                  </xs:complexType>
+                </xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+  
+        </xs:sequence>
+        <xs:attribute name="nom" type="xs:ID"/>
+        <xs:attribute name="entreprise" type="xs:string" fixed="SNCF"/>
+      </xs:complexType>
+    </xs:element>
+</xs:schema>

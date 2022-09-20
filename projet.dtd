@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT ligne (gares,variantes,trains)>
+<!ELEMENT gares (gare+)>
+<!ELEMENT gare (#PCDATA)>
+<!ELEMENT variantes (variante+)>
+<!ELEMENT variante EMPTY>
+<!ELEMENT trains (train+)>
+<!ELEMENT train (trajets+)>
+<!ELEMENT trajets (trajet+)>
+<!ELEMENT trajet (depart, terminus, horaires)>
+<!ELEMENT depart EMPTY>
+<!ELEMENT terminus EMPTY>
+<!ELEMENT horaires (horaire+)>
+<!ELEMENT horaire (#PCDATA)>
+
+<!ATTLIST ligne
+      nom CDATA #IMPLIED
+      entreprise CDATA #FIXED "SNCF">
+  <!ATTLIST gare
+      id ID #REQUIRED>
+  <!ATTLIST variante
+      id ID #REQUIRED
+      gares IDREFS #REQUIRED>
+  <!ATTLIST train 
+      code ID #IMPLIED>
+  <!ATTLIST trajets 
+      jours (Lundi | Mardi | Mercredi | Jeudi | Vendredi | Samedi | Dimanche) #REQUIRED>
+  <!ATTLIST trajet 
+      var IDREF #REQUIRED>
+  <!ATTLIST depart 
+      gare IDREF #REQUIRED>
+  <!ATTLIST terminus 
+      gare IDREF #REQUIRED>
+  <!ATTLIST horaire 
+      gare IDREF #REQUIRED>

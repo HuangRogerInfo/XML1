@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+  <xsl:template match="ligne">
+  <html>
+    <body>
+      <h1 style="text-align:center"> Projet Web Sémantique</h1>
+
+      <h3> Question 1 : la liste des gares </h3>
+      <ul>
+          <xsl:apply-templates select="gares" /> 
+      </ul>
+
+      <h3> Question 2 : pour une gare donnée, la liste des horaires des trains qui s'y arrêtent   </h3>
+      <table border="1">
+      <CAPTION> <I> Horaires pour la gare g1 </I> </CAPTION> 
+        <tr>
+            <th> Nom du train </th>
+            <th> Heure d'arrivée </th>
+        </tr>
+      <xsl:for-each select='//horaire[@gare="g1"]' >
+        <tr>
+          <td> <xsl:value-of select="./../../../../@code"/> </td>
+          <td> <xsl:value-of select="." /> </td>
+        </tr>
+      </xsl:for-each>
+      </table>
+      
+      <br/>
+
+      <h3> Question 3 : le nombre de trains qui circulent un dimanche </h3>
+      <p>
+        Ce dimanche il y a <xsl:value-of select='count(//train/trajets/@jours[contains(.,"Mercredi")])' /> trains en circulation
+      </p>
+
+      <h3> Question 4 : pour un horaire donné, un jour donné et une gare donnée, le type de correspondances qui existent. </h3>
+      <table border="1" style="width:250px">
+      <CAPTION> <I> Trajets qui passent en gare g2, à 19h45, le mercredi  </I> </CAPTION> 
+      <xsl:for-each select='//trajet[horaires[horaire[@gare="g2"]="19:45"] and ../@jours[contains(.,"Mercredi")]]' >
+        <tr>
+          <tr> <td colspan="2"> Trajet </td></tr>
+          <xsl:for-each select="./horaires/horaire">
+            <tr>
+              <td> <xsl:value-of select="./@gare"/> </td>
+              <td> <xsl:value-of select="." /> </td>
+            </tr>
+          </xsl:for-each>
+        </tr>
+      </xsl:for-each>
+      </table>
+     
+    </body>  
+  </html>
+  </xsl:template>
+  
+  <xsl:template match="gare">
+    <li> <xsl:value-of select="."/> </li>
+  </xsl:template>
+  
+</xsl:stylesheet>
